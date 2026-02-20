@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ale & Ro — ¡Nos Casamos!</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Mynerve&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ══════════════════════════════════════════
+       TOKENS
+    ══════════════════════════════════════════ */
+    :root {
+      --cream:    #f0e9d6;
+      --grey:     #d6d6d0;
+      --black:    #111111;
+      --green:    #3a6b38;
+      --white:    #faf8f2;
+
+      --font-hand: 'Mynerve', cursive;
+      --font-mono: 'Roboto Mono', monospace;
+    }
+
+    /* ══════════════════════════════════════════
+       RESET
+    ══════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--black);
+      font-family: var(--font-mono);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ══════════════════════════════════════════
+       SHARED SECTION STRUCTURE
+       Each section is a full-width block.
+       Background illustrations sit as CSS
+       background-image on pseudo-elements so
+       the text stays on top and you can swap
+       the image path without touching layout.
+    ══════════════════════════════════════════ */
+    .section {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── illustration layer (left + right panels) ──
+       Use CSS custom properties per-section to
+       point at your PNG exports.
+       PNGs should have transparent backgrounds.
+    */
+    .section::before,
+    .section::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 28%;
+      max-width: 260px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      pointer-events: none;
+    }
+    .section::before {
+      left: 0;
+      background-position: left center;
+      background-image: var(--illo-left, none);
+    }
+    .section::after {
+      right: 0;
+      background-position: right center;
+      background-image: var(--illo-right, none);
+    }
+
+    /* text/content stays above illustrations */
+    .section-inner {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 6rem 32% 6rem; /* 32% sides = leaves room for illustrations */
+      width: 100%;
+    }
+
+    /* ══════════════════════════════════════════
+       SECTION 1 — HERO  (cream)
+    ══════════════════════════════════════════ */
+    .s-hero {
+      background-color: var(--cream);
+      background-image: url('hero.png');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      min-height: 100svh;
+
+      /* No pseudo-element illustrations needed — image covers full section */
+      --illo-left:  none;
+      --illo-right: none;
+    }
+
+    .s-hero .section-inner {
+      padding-top: 7rem;
+      padding-bottom: 7rem;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-hand);
+      font-size: clamp(2.6rem, 8vw, 5rem);
+      color: var(--green);
+      line-height: 1;
+      margin-bottom: 0.4em;
+      text-transform: uppercase;
+    }
+
+    .hero-names {
+      font-family: var(--font-hand);
+      font-size: clamp(1.6rem, 5vw, 3rem);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--black);
+    }
+
+    /* ══════════════════════════════════════════
+       SECTION 2 — DÓNDE  (grey)
+    ══════════════════════════════════════════ */
+    .s-donde {
+      background: var(--grey);
+      min-height: 60svh;
+
+      --illo-left:  url('illustrations/donde-left.png');
+      --illo-right: url('illustrations/donde-right.png');
+    }
+
+    .section-question {
+      font-family: var(--font-hand);
+      font-size: clamp(2.8rem, 9vw, 6rem);
+      color: var(--black);
+      line-height: 1;
+      margin-bottom: 0.5em;
+      text-transform: uppercase;
+    }
+
+    .section-answer-big {
+      font-family: var(--font-hand);
+      font-size: clamp(1.5rem, 5vw, 3rem);
+      color: var(--green);
+      line-height: 1.1;
+      margin-bottom: 0.4em;
+      text-transform: uppercase;
+    }
+
+    .section-detail {
+      font-family: var(--font-mono);
+      font-size: clamp(0.65rem, 1.8vw, 0.85rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--black);
+      line-height: 1.8;
+    }
+
+    .map-link {
+      display: inline-block;
+      margin-top: 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 2px;
+      transition: color 0.2s, opacity 0.2s;
+    }
+    .map-link:hover { opacity: 0.55; }
+
+    /* ══════════════════════════════════════════
+       SECTION 3 — CUÁNDO  (black)
+    ══════════════════════════════════════════ */
+    .s-cuando {
+      background: var(--black);
+      min-height: 50svh;
+
+      /* No side illustrations in this section per the design */
+      --illo-left:  none;
+      --illo-right: none;
+    }
+
+    .s-cuando .section-question { color: var(--white); }
+    .s-cuando .section-answer-big { color: var(--green); }
+
+    /* ══════════════════════════════════════════
+       SECTION 4 — REGALO / RSVP  (grey)
+    ══════════════════════════════════════════ */
+    .s-regalo {
+      background: var(--grey);
+      min-height: 60svh;
+
+      --illo-left:  url('illustrations/regalo-left.png');
+      --illo-right: url('illustrations/regalo-right.png');
+    }
+
+    .section-body {
+      font-family: var(--font-mono);
+      font-size: clamp(0.65rem, 1.8vw, 0.82rem);
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--green);
+      line-height: 2;
+      margin-top: 0.8em;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* RSVP button — pill style matching screenshot */
+    .btn-rsvp {
+      display: inline-block;
+      margin-top: 2.5rem;
+      font-family: var(--font-mono);
+      font-size: clamp(0.6rem, 1.8vw, 0.75rem);
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--cream);
+      text-decoration: none;
+      padding: 0.9em 2.8em;
+      border-radius: 999px;
+      transition: background 0.22s, color 0.22s;
+    }
+    .btn-rsvp:hover {
+      background: var(--green);
+      color: var(--white);
+    }
+
+    /* ══════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════ */
+    footer {
+      background: var(--black);
+      text-align: center;
+      padding: 2.5rem 2rem;
+      color: rgba(255,255,255,0.3);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      line-height: 2;
+    }
+    footer a {
+      color: inherit;
+      text-decoration: none;
+    }
+    footer a:hover { color: rgba(255,255,255,0.6); }
+
+    /* ══════════════════════════════════════════
+       SCROLL REVEAL
+    ══════════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.22s; }
+    .reveal-d3 { transition-delay: 0.36s; }
+    .reveal-d4 { transition-delay: 0.5s; }
+
+    /* Hero animates on load */
+    .hero-animate {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1s ease forwards;
+    }
+    .hero-animate:nth-child(1) { animation-delay: 0.15s; }
+    .hero-animate:nth-child(2) { animation-delay: 0.35s; }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: none; }
+    }
+
+    /* ══════════════════════════════════════════
+       RESPONSIVE ADJUSTMENTS
+    ══════════════════════════════════════════ */
+    @media (max-width: 700px) {
+      .section-inner {
+        padding-left: 2rem;
+        padding-right: 2rem;
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+      }
+
+      /* Hero mobile: swap to vertical illustration image */
+      .s-hero {
+        background-image: url('hero-responsive.png');
+        background-size: cover;
+        background-position: center center;
+      }
+
+      .s-hero .section-inner {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════
+       SECTION 1 — HERO
+  ══════════════════════════════ -->
+  <section class="section s-hero">
+    <div class="section-inner">
+      <h1 class="hero-eyebrow hero-animate">Nos Casamos</h1>
+      <p  class="hero-names   hero-animate">Ale &amp; Ro</p>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════
+       SECTION 2 — DÓNDE
+  ══════════════════════════════ -->
+  <section class="section s-donde">
+    <div class="section-inner">
+      <h2 class="section-question reveal">¿Dónde?</h2>
+      <p  class="section-answer-big reveal reveal-d1">La Aguada Polo</p>
+      <p  class="section-detail reveal reveal-d2">Open Door, Buenos Aires, Argentina.</p>
+      <a  class="map-link reveal reveal-d3"
+          href="https://www.google.com/maps/place/La+Aguada+Polo+%26+Resort/@-34.474647,-59.089542,16z/data=!4m9!3m8!1s0x95bc8013aeebdac5:0xa95ea5cf9f527c70!5m2!4m1!1i2!8m2!3d-34.4746475!4d-59.0895423!16s%2Fg%2F11cl_kw8vj?hl=es-419&entry=tts"
+          target="_blank" rel="noopener">
+        Cómo llegar →
+      </a>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════
+       SECTION 3 — CUÁNDO
+  ══════════════════════════════ -->
+  <section class="section s-cuando">
+    <div class="section-inner">
+      <h2 class="section-question reveal">¿Cuándo?</h2>
+      <p  class="section-answer-big reveal reveal-d1">28 de Marzo a las 14hs</p>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════
+       SECTION 4 — REGALO / RSVP
+  ══════════════════════════════ -->
+  <section class="section s-regalo">
+    <div class="section-inner">
+      <h2 class="section-question reveal">¿Regalo?</h2>
+      <p  class="section-body reveal reveal-d1">
+        El único regalo que queremos,<br>
+        es que vengas, asique dale, vení
+      </p>
+      <a  class="btn-rsvp reveal reveal-d2"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSe49YgR-Bg2_1RO5byj2Jpb9d9iNDW0N5U3Q8CcJ-jzkmlAPA/viewform?usp=header"
+          target="_blank" rel="noopener">
+        Confirmar asistencia
+      </a>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════
+       FOOTER
+  ══════════════════════════════ -->
+  <footer>
+    <p>Ale &amp; Ro · 28 de Marzo 2026 · La Aguada Polo, Open Door</p>
+    <p style="margin-top:0.5rem;">
+      Invitaciones Digitales · <a href="#" target="_blank">@de.delphi</a> · 2026
+    </p>
+  </footer>
+
+
+  <!-- ══════════════════════════════
+       JS — Scroll reveal
+  ══════════════════════════════ -->
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+  <!--
+    ════════════════════════════════════════════════════════
+    HOW TO ADD YOUR ILLUSTRATIONS
+    ════════════════════════════════════════════════════════
+
+    Each section uses two CSS custom properties to load
+    left and right illustration PNGs:
+      --illo-left:  url('illustrations/FILENAME.png');
+      --illo-right: url('illustrations/FILENAME.png');
+
+    Export your PNGs with a transparent background and place
+    them in an "illustrations/" folder next to this HTML file.
+    Then update the url() paths in each section's CSS rule:
+
+      Section 1 Hero:   --illo-left / --illo-right  in .s-hero
+      Section 2 Dónde:  --illo-left / --illo-right  in .s-donde
+      Section 4 Regalo: --illo-left / --illo-right  in .s-regalo
+
+    Section 3 (Cuándo / black) has no side illustrations
+    per the original design — add them the same way if needed.
+
+    For a single full-bleed illustration (e.g. the scattered
+    wine glasses in the hero), you can also set it directly
+    on the section element:
+      .s-hero { background-image: url('hero-bg.png'); background-size: cover; }
+    and remove the ::before / ::after pseudo-elements for that section.
+    ════════════════════════════════════════════════════════
+  -->
+
+</body>
+</html>
