@@ -16,7 +16,9 @@
     ══════════════════════════════════════════ */
     :root {
       --cream:    #f0e9d6;
-      --grey:     #F7A072;
+      --orange:   #EC6E31;
+      --brown:    #59381C;
+      --sage:     #989E84;
       --black:    #111111;
       --green:    #3a6b38;
       --white:    #faf8f2;
@@ -132,10 +134,10 @@
     }
 
     /* ══════════════════════════════════════════
-       SECTION 2 — DÓNDE  (grey)
+       SECTION 2 — DÓNDE  (orange)
     ══════════════════════════════════════════ */
     .s-donde {
-      background: var(--grey);
+      background: var(--orange);
       min-height: 60svh;
 
       --illo-left:  url('illustrations/donde-left.png');
@@ -154,7 +156,7 @@
     .section-answer-big {
       font-family: var(--font-hand);
       font-size: clamp(1.5rem, 5vw, 3rem);
-      color: var(--green);
+      color: var(--cream);
       line-height: 1.1;
       margin-bottom: 0.4em;
       text-transform: uppercase;
@@ -187,10 +189,10 @@
     .map-link:hover { opacity: 0.55; }
 
     /* ══════════════════════════════════════════
-       SECTION 3 — CUÁNDO  (black)
+       SECTION 3 — CUÁNDO  (brown)
     ══════════════════════════════════════════ */
     .s-cuando {
-      background: var(--black);
+      background: var(--brown);
       min-height: 50svh;
 
       /* No side illustrations in this section per the design */
@@ -198,19 +200,37 @@
       --illo-right: none;
     }
 
-    .s-cuando .section-question { color: var(--white); }
-    .s-cuando .section-answer-big { color: var(--green); }
+    .s-cuando .section-question { color: var(--cream); }
+    .s-cuando .section-answer-big { color: var(--cream); }
 
     /* ══════════════════════════════════════════
-       SECTION 4 — REGALO / RSVP  (grey)
+       SECTION 3.5 — DRESS CODE  (sage)
+    ══════════════════════════════════════════ */
+    .s-dresscode {
+      background: var(--sage);
+      min-height: 50svh;
+
+      /* No side illustrations in this section */
+      --illo-left:  none;
+      --illo-right: none;
+    }
+
+    .s-dresscode .section-question { color: var(--cream); }
+    .s-dresscode .section-answer-big { color: var(--cream); }
+
+    /* ══════════════════════════════════════════
+       SECTION 4 — REGALO / RSVP  (orange)
     ══════════════════════════════════════════ */
     .s-regalo {
-      background: var(--grey);
+      background: var(--orange);
       min-height: 60svh;
 
       --illo-left:  url('illustrations/regalo-left.png');
       --illo-right: url('illustrations/regalo-right.png');
     }
+
+    .s-regalo .section-question { color: var(--cream); }
+    .s-regalo .section-body { color: var(--cream); }
 
     .section-body {
       font-family: var(--font-mono);
@@ -359,6 +379,17 @@
     <div class="section-inner">
       <h2 class="section-question reveal">¿Cuándo?</h2>
       <p  class="section-answer-big reveal reveal-d1">28 de Marzo a las 14hs</p>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════
+       SECTION 3.5 — DRESS CODE
+  ══════════════════════════════ -->
+  <section class="section s-dresscode">
+    <div class="section-inner">
+      <h2 class="section-question reveal">Dress Code</h2>
+      <p  class="section-answer-big reveal reveal-d1">Elegante Sport</p>
     </div>
   </section>
 
